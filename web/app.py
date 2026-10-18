@@ -8,7 +8,7 @@ def hello():
 
 @app.route("/<path:subpath>")
 def page(subpath):
-    if '~' in subpath or '//' in subpath or '..' in subpath:
+    if ('~' in subpath or '//' in subpath or '..' in subpath):
         return render_template("403.html"), 403
     validPath = False
     filepath = "./templates/"+subpath
@@ -21,7 +21,7 @@ def page(subpath):
     if not validPath:
         return render_template("404.html"), 404
     else:
-        return render_template(filepath)
+        return render_template(subpath)
 
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0')
